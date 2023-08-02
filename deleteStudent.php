@@ -1,10 +1,5 @@
 <?php
-$sv = $_POST;
-$name = $_POST["name"];
-$email = $_POST["email"];
-$birthday = $_POST["birthday"];
-$gender = $_POST["gender"];
-$class_id = $_POST["class_id"];
+$id = $_GET["id"];
 // luu sv vao db
 
 $host = "localhost";
@@ -18,10 +13,9 @@ if ($conn -> connect_error){
 }
 
 // truy van
-$sql = "INSERT INTO sinhvien (name, email, birthday, gender, class_id) VALUES ('$name', '$email', '$birthday', '$gender', $class_id)";
+$sql = "DELETE FROM sinhvien WHERE id = $id";
 if ($conn -> query($sql)){
     header("location: database.php");// chuyen sang trang danh sach
 } else{
     echo "Error";
 }
-

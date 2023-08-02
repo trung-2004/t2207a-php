@@ -1,4 +1,11 @@
 <?php
+//
+session_start();
+$login_user = $_SESSION["user"]?$_SESSION["user"]:null;
+if (!$login_user){
+    header("Location: login.php");
+    die("Vui lòng đăng nhập");
+}
 // ket noi db
 $host = "localhost";
 $user = "root";
@@ -37,6 +44,7 @@ if ($result -> num_rows > 0){
 <body>
 <section>
     <div class="container">
+        <h1>Bạn đang đăng nhập dưới tên: <?php echo $login_user["name"] ?></h1>
         <br>
         <a href="createStudent.php" class="btn btn-primary md-2">Add Student</a>
         <br>
@@ -49,6 +57,8 @@ if ($result -> num_rows > 0){
                 <th scope="col">birthday</th>
                 <th scope="col">gender</th>
                 <th scope="col">class id</th>
+                <th scope="col">update</th>
+                <th scope="col">delete</th>
             </tr>
             </thead>
             <tbody>
@@ -61,6 +71,12 @@ if ($result -> num_rows > 0){
                     echo "<td>".$st["gender"]."</td>";
                     echo "<td>".$st["class_id"]."</td>";
                     ?>
+                    <td>
+                        <a href="editStudent.php?id=<?php echo $st["id"]; ?>">Sửa</a>
+                    </td>
+                    <td>
+                        <a href="deleteStudent.php?id=<?php echo $st["id"]; ?>">Xóa</a>
+                    </td>
                 </tr>
             <?php   endforeach; ?>
             </tbody>

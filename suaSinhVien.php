@@ -1,5 +1,5 @@
 <?php
-$sv = $_POST;
+$id = $_GET["id"];
 $name = $_POST["name"];
 $email = $_POST["email"];
 $birthday = $_POST["birthday"];
@@ -18,10 +18,9 @@ if ($conn -> connect_error){
 }
 
 // truy van
-$sql = "INSERT INTO sinhvien (name, email, birthday, gender, class_id) VALUES ('$name', '$email', '$birthday', '$gender', $class_id)";
+$sql = "UPDATE sinhvien SET name = '$name', email = '$email', birthday = '$birthday', gender = '$gender', class_id = $class_id WHERE id = $id";
 if ($conn -> query($sql)){
     header("location: database.php");// chuyen sang trang danh sach
 } else{
     echo "Error";
 }
-
